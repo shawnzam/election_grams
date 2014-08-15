@@ -180,10 +180,8 @@ def main
   @opponent_master_bigram_counts = @opponent_master_bigram_counts.sort_by{|k,v| v}.reverse[0..499]
   puts "Opponnet\tTask 4 of 7\tTrimming trigrams"
   @opponent_master_trigram_counts = @opponent_master_trigram_counts.sort_by{|k,v| v}.reverse[0..499]
-
   puts "Candidate\tTask 5 of 7\tWriting totals"
   write_candiates_totals_csv
-
   @countrows =Array.new
   puts "Candidate\tTask 6 of 7\tCounting article totals"
   count_per_article
