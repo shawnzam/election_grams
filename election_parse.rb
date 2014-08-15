@@ -11,8 +11,8 @@ def prepare_text(text)
 end
 
 def stemmify_name name
-  # name_as_array = prepare_text name
-  name_as_array = name.split(" ")
+  name_as_array = prepare_text name
+  # name_as_array = name.split(" ")
   if name_as_array.size == 2
     return name_as_array.map(&:downcase).map(&:strip).map(&:stem).join(" ")
   end
@@ -45,7 +45,11 @@ def process_candidate_articles(filename)
     bigrams.each do |v|
       candidate_bicounts[v.join(" ")] += 1
     end
-    if (candidate_bicounts[@candidate_name_stem] == 0) && (candidate_bicounts[@opponent_name_stem] == 0)
+    row['count_candidate_name'] = candidate_bicounts[@candidate_name_stem]
+    row['count_opponent_name'] = candidate_bicounts[@opponent_name_stem]
+    puts row['count_candidate_name']
+    puts row['count_opponent_name']
+    if (row['count_candidate_name']  == 0) && (row['count_opponent_name']  == 0)
       CSV.open("out_#{@candidate_name}_removed_articles.csv", 'ab') do |csv|
         csv << row
       end
@@ -125,6 +129,9 @@ end
 
 def write_candidate_per_article_totals
   # remove bi and trigram headers
+  if @candidate_per_article_grams.empty?
+    return
+  end
   headers =  @candidate_per_article_grams.first.keys.delete_if {|h| h.class == Symbol}
   headers +=
     @candidate_master_bigram_counts.map {|row| "Candidate Bigram ; #{row.first}"} +
