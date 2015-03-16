@@ -3,7 +3,7 @@
 ### Bigrams and Trigrams are counted on a per head to head election basis. A matrix is returned containing occurrences for a candidate's & opponent's most popular bigrams within the candidate's text corpus. A list of the most popular grams is also returned.
 
 
-#####Articles are removed if we find no mention of a temmed version of the candidate's name within the corpus.
+#####Articles are removed if we find no mention of a stemmed version of the candidate's name within the corpus.
 
 #####Elections years analyzed run from 1980 - 2012 
 
@@ -59,7 +59,7 @@ Up to three and at most two files will be outputted for each election. For candi
 
 ###Methodology for Candidate Name Searching
 
-Since articles that do not mention the candidate by name need to be removed form the curpos I implemented the following algorithm to filter potential *nameless* artiles:
+Since articles that do not mention the candidate by name need to be removed form the corpus I implemented the following algorithm to filter potential *nameless* articles:
 
     def stemmify_name name
       name_as_array = prepare_text name
