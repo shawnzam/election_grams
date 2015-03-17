@@ -13,7 +13,7 @@ Using:
 - Stemmify
 
 
-Each candidate has a directory containing at most two input files. These files are scrapes from a set of Factive and/or Nexus articles. The article text along with the following meta data fields may beParsing present within the input files (located within `input/`):
+Each candidate has a directory containing at most two input files. These files are scrapes from a set of Factiva and/or Nexus articles. The article text along with the following meta data fields may be present within the input files (located within `input/`):
 
 - candiate_name
 - opponent_name
@@ -59,7 +59,7 @@ Up to three and at most two files will be outputted for each election. For candi
 
 ###Methodology for Candidate Name Searching
 
-Since articles that do not mention the candidate by name need to be removed form the corpus I implemented the following algorithm to filter potential *nameless* articles:
+Since articles that do not mention the candidate by name need to be removed from the corpus I implemented the following algorithm to filter potential *nameless* articles:
 
     def stemmify_name name
       name_as_array = prepare_text name
@@ -74,7 +74,7 @@ Since articles that do not mention the candidate by name need to be removed form
       return name_as_array.map(&:downcase).map(&:strip).map(&:stem).join(" ")
     end
 
-This function prepares the name by splitting it on spaces and removing any non recognized characters. If the name splits nicely into two parts, say *Dale Bumpers*, a bigram consisting of *dale bumper* is returned. If the name consists of two or more parts, any mention of Jr, Sr, III or a initial is removed. 
+This function prepares the name by splitting it on spaces and removing any non recognized characters. If the name splits nicely into two parts, say *Dale Bumpers*, a bigram consisting of *dale bumper* is returned. If the name consists of two or more parts, any mention of Jr, Sr, III or a middle initial is removed. 
 At this point a name like *Henry D. McMaster* would return *henri mcmaster*.
 
 *James David Santin* becomes *jame david santin*
